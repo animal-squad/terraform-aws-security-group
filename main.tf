@@ -20,7 +20,7 @@ resource "aws_vpc_security_group_egress_rule" "egress" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ingress" {
-  for_each = { for idx, rule in var.ingress_rules : idx => rule }
+  for_each = var.ingress_rules
 
   security_group_id = aws_security_group.sg.id
 
@@ -31,6 +31,6 @@ resource "aws_vpc_security_group_ingress_rule" "ingress" {
   referenced_security_group_id = each.value.ref_sg_id
 
   tags = {
-    Name = "${var.name_prefix}-ingress-rule-${each.key}"
+    Name = "${each.key}"
   }
 }

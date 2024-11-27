@@ -22,15 +22,15 @@ variable "vpc_id" {
 }
 
 variable "ingress_rules" {
-  description = "ingress 규칙 목록"
+  description = "ingress 규칙 목록. key 값은 규칙의 이름에 사용됩니다."
 
-  type = list(object({
+  type = map(object({
     from_port   = number
     to_port     = number
     ip_protocol = string
-    cidr_ipv4   = optional(string)
-    ref_sg_id   = optional(string)
+    cidr_ipv4   = optional(string, "0.0.0.0/0")
+    ref_sg_id   = optional(string, null)
   }))
 
-  default = []
+  default = {}
 }
