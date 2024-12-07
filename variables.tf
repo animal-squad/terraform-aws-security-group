@@ -28,7 +28,7 @@ variable "ingress_rules" {
     from_port   = number
     to_port     = number
     ip_protocol = string
-    cidr_ipv4   = optional(string, "0.0.0.0/0")
+    cidr_ipv4   = optional(string, null)
     ref_sg_id   = optional(string, null)
   }))
 
